@@ -7,6 +7,7 @@ NUM_OF_SENTINELS=3
 NUM_OF_REDIS=3
 REDIS_SENTINEL_NAME="redis-sentinel"
 REDIS_MASTER_NAME="redismaster"
+REDIS_ZERO_NAME="redis-zero"
 
 # From https://unix.stackexchange.com/a/129401/304268
 while getopts ":t:n:s:o:r:" opt; do
@@ -17,9 +18,13 @@ while getopts ":t:n:s:o:r:" opt; do
     ;;
 	s) REDIS_SENTINEL_NAME="$OPTARG"
 	;;
+	m) REDIS_MASTER_NAME="$OPTARG"
+	;;
 	o) NUM_OF_SENTINELS="$OPTARG"
 	;;
 	r) NUM_OF_REDIS="$OPTARG"
+	;;
+	z) REDIS_ZERO_NAME="$OPTARG"
 	;;
     \?) echo "Invalid option -$OPTARG" >&2
     ;;
@@ -27,7 +32,7 @@ while getopts ":t:n:s:o:r:" opt; do
 done
 
 echo "Starting redis-zero"
-docker service create --network $NETWORK --name redis-zero redis:5.0.9-alpine
+docker service create --network $NETWORK --name $REDIS_ZERO_NAME redis:5.0.9-alpine || true
 
 echo "Starting services"
 # docker stack deploy -c scripts/docker-compose.yml cache
@@ -51,7 +56,7 @@ old_master=$(docker run --rm --network $NETWORK mlaradji/redis-utils:$TAG \
 echo "redis-zero ip is ${old_master}"
 
 echo "Removing redis-zero"
-docker service rm redis-zero
+docker service rm $REDIS_ZERO_NAME
 
 until [ "$(docker run --rm --network $NETWORK mlaradji/redis-utils:$TAG \
 	$REDIS_SENTINEL_NAME $REDIS_MASTER_NAME value ip)" != "$old_master" ]; do
