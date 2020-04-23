@@ -10,7 +10,7 @@ REDIS_MASTER_NAME="redismaster"
 REDIS_ZERO_NAME="redis-zero"
 
 # From https://unix.stackexchange.com/a/129401/304268
-while getopts ":t:n:s:o:r:" opt; do
+while getopts ":t:n:s:o:r:m:z:" opt; do
   case $opt in
 	t) TAG="$OPTARG"
 	;;
