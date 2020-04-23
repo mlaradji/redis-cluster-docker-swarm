@@ -4,11 +4,12 @@ set -e
 
 TAG=${1:-"latest"}
 
-echo "Building redis-look"
-docker build -t thomasjpfan/redis-look:$TAG redis-look
+ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." >/dev/null 2>&1 && pwd )"
 
-echo "Building redis-sentinel"
-docker build -t thomasjpfan/redis-sentinel:$TAG redis-sentinel
+for image in "redis-look" "redis-sentinel" "redis-utils"; do
+	echo "Building $image"
+	docker build -t mlaradji/${image}:${TAG} "${ROOT}/${image}"
+	docker push mlaradji/${image}:${TAG} &
+done
 
-echo "Building redis-utils"
-docker build -t thomasjpfan/redis-utils:$TAG redis-utils
+wait
