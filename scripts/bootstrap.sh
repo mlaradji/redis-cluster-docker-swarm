@@ -30,7 +30,7 @@ echo "Starting redis-zero"
 docker service create --network $NETWORK --name redis-zero redis:5.0.9-alpine
 
 echo "Starting services"
-docker stack deploy -c scripts/docker-compose.yml cache
+# docker stack deploy -c scripts/docker-compose.yml cache
 
 until [ "$(docker run --rm --network $NETWORK mlaradji/redis-utils:$TAG \
 	$REDIS_SENTINEL_NAME $REDIS_MASTER_NAME \
