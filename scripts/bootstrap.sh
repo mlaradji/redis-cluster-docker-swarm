@@ -5,13 +5,14 @@ set -e
 # Grab the root directory path for redis-cluster-docker-swarm.
 ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." >/dev/null 2>&1 && pwd )"
 # Grab the version number from version.txt.
-export TAG=${1:-`cat ${ROOT}/VERSION`}
+export TAG=`cat ${ROOT}/VERSION`
 
 NUM_OF_SENTINELS=3
 NUM_OF_REDIS=3
 REDIS_SENTINEL_NAME="redis-sentinel"
 REDIS_MASTER_NAME="redismaster"
 REDIS_ZERO_NAME="redis-zero"
+NETWORK="redis"
 
 # From https://unix.stackexchange.com/a/129401/304268
 while getopts ":t:n:s:o:r:m:z:" opt; do
@@ -35,11 +36,11 @@ while getopts ":t:n:s:o:r:m:z:" opt; do
   esac
 done
 
+echo $NUM_OF_SENTINELS:$TAG
 echo "Starting redis-zero"
 docker service create --network $NETWORK --name $REDIS_ZERO_NAME redis:5.0.9-alpine || true
 
 echo "Starting services"
-# docker stack deploy -c "$ROOT/scripts/docker-compose.yml" cache
 
 until [ "$(docker run --rm --network $NETWORK mlaradji/redis-utils:$TAG \
 	$REDIS_SENTINEL_NAME $REDIS_MASTER_NAME \
