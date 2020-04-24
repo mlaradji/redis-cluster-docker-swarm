@@ -10,7 +10,6 @@ TAG=${1:-`cat ${ROOT}/VERSION`}
 for image in "redis-look" "redis-sentinel" "redis-utils"; do
 	echo "Building $image"
 	docker build -t mlaradji/${image}:${TAG} "${ROOT}/${image}"
-	docker run mlaradji/${image}:${TAG}
 	docker push mlaradji/${image}:${TAG} &
 done
 
