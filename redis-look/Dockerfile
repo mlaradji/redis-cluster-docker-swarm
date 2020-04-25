@@ -13,6 +13,6 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 WORKDIR /redis
 COPY redis.conf .
 
-EXPOSE 26379
+EXPOSE 6379
 
 ENTRYPOINT ["entrypoint.sh"]
