@@ -1,6 +1,6 @@
 FROM redis:5.0.9-alpine
 
-LABEL version="1.0.4"
+LABEL maintainer="Mohamed Laradji <mlaradji@protonmail.ch>"
 
 ENV REDIS_SENTINEL_IP redis-sentinel
 ENV REDIS_MASTER_NAME redismaster
