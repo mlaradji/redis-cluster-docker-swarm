@@ -1,6 +1,6 @@
-FROM redis:4.0.11-alpine
+FROM redis:5.0.9-alpine
 
-LABEL version="1.0.2"
+LABEL maintainer="Mohamed Laradji <mlaradji@protonmail.ch>"
 
 ENV SENTINEL_QUORUM=2 \
     SENTINEL_DOWN_AFTER=1000 \

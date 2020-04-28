@@ -1,6 +1,6 @@
-FROM redis:4.0.11-alpine
+FROM redis:5.0.9-alpine
 
-LABEL version="1.0.2"
+LABEL maintainer="Mohamed Laradji <mlaradji@protonmail.ch>"
 
 ENV REDIS_SENTINEL_IP redis-sentinel
 ENV REDIS_MASTER_NAME redismaster
@@ -13,6 +13,6 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 WORKDIR /redis
 COPY redis.conf .
 
-EXPOSE 26379
+EXPOSE 6379
 
 ENTRYPOINT ["entrypoint.sh"]

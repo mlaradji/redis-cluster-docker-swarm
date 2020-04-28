@@ -1,25 +1,25 @@
-version: '3.1'
-
+version: "3.8"
 
 services:
-
   redis-sentinel:
-    image: thomasjpfan/redis-sentinel:${TAG:-latest}
+    image: mlaradji/redis-sentinel:${TAG:-latest}
     environment:
       - REDIS_IP=redis-zero
       - REDIS_MASTER_NAME=redismaster
     deploy:
+      mode: replicated
       replicas: 3
     networks:
       - redis
 
   redis:
-    image: thomasjpfan/redis-look:${TAG:-latest}
+    image: mlaradji/redis-look:${TAG:-latest}
     environment:
       - REDIS_SENTINEL_IP=redis-sentinel
       - REDIS_MASTER_NAME=redismaster
       - REDIS_SENTINEL_PORT=26379
     deploy:
+      mode: replicated
       replicas: 3
     networks:
       - redis
