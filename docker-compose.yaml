@@ -15,6 +15,7 @@ x-redis: &redis
     - REDIS_MASTER_NAME=redis_zero
     - REDIS_SENTINEL_IP=redis_sentinel
     - REDIS_SENTINEL_PORT=26379
+    - REDIS_IP=${STACK:-redis-cluster-docker-swarm}_redis_zero
 
 services:
   # Redis services
