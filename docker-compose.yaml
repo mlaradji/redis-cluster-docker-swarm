@@ -27,7 +27,7 @@ x-redis: &redis
 services:
   redis-sentinel:
     <<: *redis
-    image: mlaradji/redis-sentinel:1.0.6
+    image: mlaradji/redis-sentinel:1.0.7-redis6.0.8
     ports:
       - "26379:26379"
     deploy:
@@ -37,7 +37,7 @@ services:
 
   redis:
     <<: *redis
-    image: mlaradji/redis-look:1.0.6
+    image: mlaradji/redis-look:1.0.7-redis6.0.8
     ports:
       - "6379:6379"
     deploy:
