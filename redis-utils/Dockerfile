@@ -1,4 +1,4 @@
-FROM redis:5.0.9-alpine
+FROM redis:6.0.8-alpine
 
 LABEL maintainer="Mohamed Laradji <mlaradji@protonmail.ch>"
 

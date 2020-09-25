@@ -1,4 +1,4 @@
-FROM redis:5.0.9-alpine
+FROM redis:6.0.8-alpine
 
 LABEL maintainer="Mohamed Laradji <mlaradji@protonmail.ch>"
 
@@ -18,8 +18,7 @@ WORKDIR /redis
 COPY sentinel.conf .
 COPY sentinel-entrypoint.sh /usr/local/bin/
 
-RUN chown redis:redis /redis/* && \
-    chmod +x /usr/local/bin/sentinel-entrypoint.sh
+RUN chown redis:redis /redis/* && chmod +x /usr/local/bin/sentinel-entrypoint.sh
 
 EXPOSE 26379
 

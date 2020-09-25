@@ -1,0 +1,42 @@
+version: "3.8"
+x-restart-policy: &restart_policy
+  restart: on-failure
+x-redis: &redis
+  <<: *restart_policy
+  networks:
+    - webnet
+  environment:
+    - SENTINEL_QUORUM=2
+    - SENTINEL_DOWN_AFTER=1000
+    - SENTINEL_FAILOVER=1000
+    - REDIS_HOST=redis
+    - REDIS_PORT=6379
+    - REDIS_PASS=
+    - REDIS_MASTER_NAME=redis_zero
+    - REDIS_SENTINEL_IP=redis_sentinel
+    - REDIS_SENTINEL_PORT=26379
+
+services:
+  # Redis services
+  redis_sentinel:
+    <<: *redis
+    image: mlaradji/redis-sentinel:1.0.6
+    ports:
+      - "26379:26379"
+    deploy:
+      mode: global
+
+  redis:
+    <<: *redis
+    image: mlaradji/redis-look:1.0.6
+    ports:
+      - "6379:6379"
+    deploy:
+      mode: global
+
+networks:
+  webnet:
+    driver: overlay
+    attachable: true
+    driver_opts:
+      encrypted: ""
