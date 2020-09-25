@@ -19,6 +19,10 @@ x-redis: &redis
     - REDIS_SENTINEL_IP=redis-sentinel
     - REDIS_SENTINEL_PORT=26379
     - REDIS_IP=${STACK:-redis-cluster-docker-swarm}_redis-zero
+  secrets:
+    - redis.client.crt
+    - redis.client.key
+    - redis.ca
 
 services:
   redis-sentinel:
@@ -28,6 +32,8 @@ services:
       - "26379:26379"
     deploy:
       mode: global
+    command:
+      - --tls-port 26379 --port 0 --tls-replication yes --tls-cert-file /run/secrets/redis.client.crt --tls-key-file /run/secrets/redis.client.key --tls-ca-cert-file /run/secrets/redis.ca
 
   redis:
     <<: *redis
@@ -36,6 +42,8 @@ services:
       - "6379:6379"
     deploy:
       mode: global
+    command:
+      - --tls-port 6379 --port 0 --tls-replication yes --tls-cert-file /run/secrets/redis.client.crt --tls-key-file /run/secrets/redis.client.key --tls-ca-cert-file /run/secrets/redis.ca
 
   redis-zero:
     image: redis:6.0.8-alpine
@@ -47,6 +55,8 @@ services:
           - "node.role==manager"
       restart_policy:
         condition: none
+    command:
+      - --tls-port 6379 --port 0 --tls-replication yes --tls-cert-file /run/secrets/redis.client.crt --tls-key-file /run/secrets/redis.client.key --tls-ca-cert-file /run/secrets/redis.ca
     networks:
       - webnet
 
