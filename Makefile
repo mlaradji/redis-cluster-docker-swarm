@@ -4,7 +4,7 @@ MASTER_NAME=$(STACK)
 
 deploy:
 	docker stack deploy ${STACK} --compose-file docker-compose.yaml;
-	./scripts/bootstrap.sh -t latest -n ${STACK}_webnet -s ${STACK}_redis-sentinel -m ${MASTER_NAME} -z ${STACK}_redis-zero -o${NODES_COUNT} -r${NODES_COUNT}
+	./scripts/bootstrap.sh -n ${STACK}_webnet -s ${STACK}_redis-sentinel -m ${MASTER_NAME} -z ${STACK}_redis-zero -o${NODES_COUNT} -r${NODES_COUNT}
 
 echo:
 	echo $(STACK);
