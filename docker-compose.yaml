@@ -1,6 +1,8 @@
 version: "3.8"
 x-restart-policy: &restart_policy
   restart: on-failure
+  deploy:
+    restart-policy: on-failure
 x-redis: &redis
   <<: *restart_policy
   networks:
@@ -12,7 +14,7 @@ x-redis: &redis
     - REDIS_HOST=redis
     - REDIS_PORT=6379
     - REDIS_PASS=pleasechangeme
-    - REDIS_MASTER_NAME=redis_zero
+    - REDIS_MASTER_NAME=redismaster
     - REDIS_SENTINEL_IP=redis_sentinel
     - REDIS_SENTINEL_PORT=26379
     - REDIS_IP=${STACK:-redis-cluster-docker-swarm}_redis_zero
