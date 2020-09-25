@@ -98,6 +98,10 @@ services:
       ]
     networks:
       - webnet
+    secrets:
+      - redis.crt
+      - redis.key
+      - ca.crt
 
 networks:
   webnet:
