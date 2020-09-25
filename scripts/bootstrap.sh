@@ -3,10 +3,9 @@
 set -e
 
 # Grab the root directory path for redis-cluster-docker-swarm.
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." >/dev/null 2>&1 && pwd)"
 # Grab the version number from version.txt.
-export TAG=$(cat ${ROOT}/VERSION)
 
+TAG=$(cat VERSION)
 NUM_OF_SENTINELS=3
 NUM_OF_REDIS=3
 REDIS_SENTINEL_NAME="redis-sentinel"
@@ -45,6 +44,7 @@ while getopts ":t:n:s:o:r:m:z:" opt; do
 done
 
 echo "Parameters:"
+echo "-----------"
 echo $TAG
 echo $NUM_OF_SENTINELS
 echo $NUM_OF_REDIS
