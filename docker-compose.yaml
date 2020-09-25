@@ -33,7 +33,20 @@ services:
     deploy:
       mode: global
     command:
-      - --tls-port 26379 --port 0 --tls-replication yes --tls-cert-file /run/secrets/redis.crt --tls-key-file /run/secrets/redis.key --tls-ca-cert-file /run/secrets/ca.crt
+      [
+        "--tls-port",
+        "26379",
+        "--port",
+        "0",
+        "--tls-replication",
+        "yes",
+        "--tls-cert-file",
+        "/run/secrets/redis.crt",
+        "--tls-key-file",
+        "/run/secrets/redis.key",
+        "--tls-ca-cert-file",
+        "/run/secrets/ca.crt",
+      ]
 
   redis:
     <<: *redis
@@ -43,7 +56,20 @@ services:
     deploy:
       mode: global
     command:
-      - --tls-port 6379 --port 0 --tls-replication yes --tls-cert-file /run/secrets/redis.crt --tls-key-file /run/secrets/redis.key --tls-ca-cert-file /run/secrets/ca.crt
+      [
+        "--tls-port",
+        "6379",
+        "--port",
+        "0",
+        "--tls-replication",
+        "yes",
+        "--tls-cert-file",
+        "/run/secrets/redis.crt",
+        "--tls-key-file",
+        "/run/secrets/redis.key",
+        "--tls-ca-cert-file",
+        "/run/secrets/ca.crt",
+      ]
 
   redis-zero:
     image: redis:6.0.8-alpine
@@ -56,7 +82,20 @@ services:
       restart_policy:
         condition: none
     command:
-      - --tls-port 6379 --port 0 --tls-replication yes --tls-cert-file /run/secrets/redis.crt --tls-key-file /run/secrets/redis.key --tls-ca-cert-file /run/secrets/ca.crt
+      [
+        "--tls-port",
+        "6379",
+        "--port",
+        "0",
+        "--tls-replication",
+        "yes",
+        "--tls-cert-file",
+        "/run/secrets/redis.crt",
+        "--tls-key-file",
+        "/run/secrets/redis.key",
+        "--tls-ca-cert-file",
+        "/run/secrets/ca.crt",
+      ]
     networks:
       - webnet
 
