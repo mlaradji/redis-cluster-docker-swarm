@@ -112,7 +112,7 @@ networks:
 
 secrets:
   redis.crt:
-    file: /certs/redis/redis.key
+    file: /certs/redis/redis.crt
   redis.key:
     file: /certs/redis/redis.key
   ca.crt:
