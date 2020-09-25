@@ -20,9 +20,9 @@ x-redis: &redis
     - REDIS_SENTINEL_PORT=26379
     - REDIS_IP=${STACK:-redis-cluster-docker-swarm}_redis-zero
   secrets:
-    - redis.client.crt
-    - redis.client.key
-    - redis.ca
+    - redis.crt
+    - redis.key
+    - ca.crt
 
 services:
   redis-sentinel:
