@@ -2,7 +2,8 @@ version: "3.8"
 x-restart-policy: &restart_policy
   restart: on-failure
   deploy:
-    restart-policy: on-failure
+    restart_policy:
+      condition: on-failure
 x-redis: &redis
   <<: *restart_policy
   networks:
@@ -20,7 +21,6 @@ x-redis: &redis
     - REDIS_IP=${STACK:-redis-cluster-docker-swarm}_redis-zero
 
 services:
-  # Redis services
   redis-sentinel:
     <<: *redis
     image: mlaradji/redis-sentinel:1.0.6
@@ -36,6 +36,19 @@ services:
       - "6379:6379"
     deploy:
       mode: global
+
+  redis-zero:
+    image: redis:6.0.8-alpine
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - "node.role==manager"
+      restart_policy:
+        condition: none
+    networks:
+      - webnet
 
 networks:
   webnet:

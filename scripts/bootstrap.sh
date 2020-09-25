@@ -44,16 +44,18 @@ while getopts ":t:n:s:o:r:m:z:" opt; do
 	esac
 done
 
+echo "Parameters:"
+echo $TAG
 echo $NUM_OF_SENTINELS
 echo $NUM_OF_REDIS
 echo $REDIS_SENTINEL_NAME
 echo $REDIS_MASTER_NAME
 echo $REDIS_ZERO_NAME
 echo $NETWORK
+echo "-----------"
 
-echo $NUM_OF_SENTINELS:$TAG
-echo "Starting redis-zero"
-docker service create --network $NETWORK --name $REDIS_ZERO_NAME redis:6.0.8-alpine || true
+# echo "Starting redis-zero"
+# docker service create --network $NETWORK --name $REDIS_ZERO_NAME redis:6.0.8-alpine || true
 
 echo "Starting services"
 
