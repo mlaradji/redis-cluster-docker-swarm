@@ -23,4 +23,4 @@ if [ ! "$master_info" ]; then
 fi
 
 sed -i "s/{{ REDIS_IP }}/$REDIS_IP/g" /redis/sentinel.conf
-redis-server /redis/sentinel.conf --sentinel "$@"
+redis-server /redis/sentinel.conf --sentinel $@

@@ -38,4 +38,4 @@ echo "Slave ip found: $slave_announce_ip"
 
 sed -i "s/{{ SLAVE_ANNOUNCE_IP }}/$slave_announce_ip/g" /redis/redis.conf
 
-redis-server /redis/redis.conf --slaveof $master_ip $master_port "$@"
+redis-server /redis/redis.conf --slaveof $master_ip $master_port $@
