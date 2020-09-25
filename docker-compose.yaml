@@ -17,11 +17,11 @@ x-redis: &redis
     - REDIS_MASTER_NAME=${REDIS_MASTER_NAME:-redismaster}
     - REDIS_SENTINEL_IP=redis_sentinel
     - REDIS_SENTINEL_PORT=26379
-    - REDIS_IP=${STACK:-redis-cluster-docker-swarm}_redis_zero
+    - REDIS_IP=${STACK:-redis-cluster-docker-swarm}_redis-zero
 
 services:
   # Redis services
-  redis_sentinel:
+  redis-sentinel:
     <<: *redis
     image: mlaradji/redis-sentinel:1.0.6
     ports:
