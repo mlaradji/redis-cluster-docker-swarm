@@ -11,7 +11,7 @@ x-redis: &redis
     - SENTINEL_FAILOVER=1000
     - REDIS_HOST=redis
     - REDIS_PORT=6379
-    - REDIS_PASS=
+    - REDIS_PASS=pleasechangeme
     - REDIS_MASTER_NAME=redis_zero
     - REDIS_SENTINEL_IP=redis_sentinel
     - REDIS_SENTINEL_PORT=26379
