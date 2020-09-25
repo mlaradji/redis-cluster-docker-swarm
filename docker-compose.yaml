@@ -66,3 +66,11 @@ networks:
     attachable: true
     driver_opts:
       encrypted: ""
+
+secrets:
+  redis.crt:
+    file: /certs/redis/redis.key
+  redis.key:
+    file: /certs/redis/redis.key
+  ca.crt:
+    file: /certs/ca/ca.crt
