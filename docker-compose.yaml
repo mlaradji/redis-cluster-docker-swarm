@@ -29,17 +29,17 @@ services:
     <<: *redis
     image: mlaradji/redis-sentinel:1.0.7-redis6.0.8
     ports:
-      - "26379:26379"
+      - "26379:66379"
     deploy:
       mode: global
     command:
       [
         "--tls-port",
-        "26379",
+        "66379",
         "--port",
-        "0",
+        "26379",
         "--tls-replication",
-        "yes",
+        "no",
         "--tls-cert-file",
         "/run/secrets/redis.crt",
         "--tls-key-file",
@@ -52,17 +52,17 @@ services:
     <<: *redis
     image: mlaradji/redis-look:1.0.7-redis6.0.8
     ports:
-      - "6379:6379"
+      - "6379:56379"
     deploy:
       mode: global
     command:
       [
         "--tls-port",
-        "6379",
+        "56379",
         "--port",
-        "0",
+        "6379",
         "--tls-replication",
-        "yes",
+        "no",
         "--tls-cert-file",
         "/run/secrets/redis.crt",
         "--tls-key-file",
@@ -84,11 +84,11 @@ services:
     command:
       [
         "--tls-port",
-        "6379",
+        "56379",
         "--port",
-        "0",
+        "6379",
         "--tls-replication",
-        "yes",
+        "no",
         "--tls-cert-file",
         "/run/secrets/redis.crt",
         "--tls-key-file",
