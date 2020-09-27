@@ -28,8 +28,8 @@ services:
   redis-sentinel:
     <<: *redis
     image: mlaradji/redis-sentinel:1.1.0-redis6.0.8-alpha
-    ports:
-      - "26379:36379"
+    # ports:
+    #   - "26379:36379"
     deploy:
       mode: global
     # command:
@@ -50,9 +50,11 @@ services:
 
   redis:
     <<: *redis
+    depends_on:
+      - sentinel
     image: mlaradji/redis-look:1.1.0-redis6.0.8-alpha
-    ports:
-      - "6379:56379"
+    # ports:
+    #   - "6379:56379"
     deploy:
       mode: global
     # command:
@@ -72,6 +74,8 @@ services:
     #   ]
 
   redis-zero:
+    depends_on:
+      - sentinel
     image: redis:6.0.8-alpine
     deploy:
       mode: replicated
