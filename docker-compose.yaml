@@ -29,13 +29,13 @@ services:
     <<: *redis
     image: mlaradji/redis-sentinel:1.0.7-redis6.0.8
     ports:
-      - "26379:66379"
+      - "26379:36379"
     deploy:
       mode: global
     command:
       [
         "--tls-port",
-        "66379",
+        "36379",
         "--port",
         "26379",
         "--tls-replication",
