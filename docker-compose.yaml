@@ -32,21 +32,21 @@ services:
       - "26379:36379"
     deploy:
       mode: global
-    command:
-      [
-        "--tls-port",
-        "36379",
-        "--port",
-        "26379",
-        "--tls-replication",
-        "no",
-        "--tls-cert-file",
-        "/run/secrets/redis.crt",
-        "--tls-key-file",
-        "/run/secrets/redis.key",
-        "--tls-ca-cert-file",
-        "/run/secrets/ca.crt",
-      ]
+    # command:
+    #   [
+    #     "--tls-port",
+    #     "36379",
+    #     "--port",
+    #     "26379",
+    #     "--tls-replication",
+    #     "no",
+    #     "--tls-cert-file",
+    #     "/run/secrets/redis.crt",
+    #     "--tls-key-file",
+    #     "/run/secrets/redis.key",
+    #     "--tls-ca-cert-file",
+    #     "/run/secrets/ca.crt",
+    #   ]
 
   redis:
     <<: *redis
@@ -55,21 +55,21 @@ services:
       - "6379:56379"
     deploy:
       mode: global
-    command:
-      [
-        "--tls-port",
-        "56379",
-        "--port",
-        "6379",
-        "--tls-replication",
-        "no",
-        "--tls-cert-file",
-        "/run/secrets/redis.crt",
-        "--tls-key-file",
-        "/run/secrets/redis.key",
-        "--tls-ca-cert-file",
-        "/run/secrets/ca.crt",
-      ]
+    # command:
+    #   [
+    #     "--tls-port",
+    #     "56379",
+    #     "--port",
+    #     "6379",
+    #     "--tls-replication",
+    #     "no",
+    #     "--tls-cert-file",
+    #     "/run/secrets/redis.crt",
+    #     "--tls-key-file",
+    #     "/run/secrets/redis.key",
+    #     "--tls-ca-cert-file",
+    #     "/run/secrets/ca.crt",
+    #   ]
 
   redis-zero:
     image: redis:6.0.8-alpine
@@ -81,27 +81,8 @@ services:
           - "node.role==manager"
       restart_policy:
         condition: none
-    command:
-      [
-        "--tls-port",
-        "56379",
-        "--port",
-        "6379",
-        "--tls-replication",
-        "no",
-        "--tls-cert-file",
-        "/run/secrets/redis.crt",
-        "--tls-key-file",
-        "/run/secrets/redis.key",
-        "--tls-ca-cert-file",
-        "/run/secrets/ca.crt",
-      ]
     networks:
       - webnet
-    secrets:
-      - redis.crt
-      - redis.key
-      - ca.crt
 
 networks:
   webnet:
