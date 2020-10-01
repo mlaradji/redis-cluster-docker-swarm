@@ -36,6 +36,8 @@ services:
       - "6379:6379"
     deploy:
       mode: global
+    volumes:
+      - redis-data:/data
 
   redis-zero:
     image: redis:6.0.8-alpine
