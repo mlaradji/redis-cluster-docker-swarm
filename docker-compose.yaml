@@ -58,3 +58,6 @@ networks:
     attachable: true
     driver_opts:
       encrypted: ""
+
+volumes:
+  redis-data:
